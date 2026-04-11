@@ -1,10 +1,10 @@
 import os
-import openai
+import requests
 from telegram import Update
 from telegram.ext import ApplicationBuilder,CommandHandler,MessageHandler,filters,ContextTypes
 from deep_translator import GoogleTranslator
 TOKEN = os.getenv("TOKEN")
-openai.api_key = os.getenv("OPENAI_API_KEY")
+HF_API_KEY = os.getenv("HF_API_KEY")
 async def start(update: Update, context):
     await update.message.reply_text("مرحباً! أنابوت تجريبي!")
 async def handle_message(update: Update,context):
@@ -72,12 +72,16 @@ async def news(update, context):
         await update.message.reply_text("خطأ في الاخبار")
 async def ai_reply(update, text):
     try:
-        response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": text}])
-        reply = response["choices"][0]["message"]["content"]
+        url = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
+        headers = {"Authorization": f"Bearer{HF_API_KEY}"}
+        payload = {"inputs": text}
+        response = requests.post(url, headers=headers, json=payload)
+        result = response.json()
+        reply = result[0]["generated_text"]
         await update.message.reply_text(reply)
     except Exception as e:
         print (e)
-        await update.message.reply_text("خطا")
+        await update.message.reply_text("حدث خطأ في الذكاء الاصطناعي ")
 def main():
     application = ApplicationBuilder().token(TOKEN).build()
     application.add_handler(CommandHandler("start",start))
