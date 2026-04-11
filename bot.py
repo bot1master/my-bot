@@ -76,6 +76,7 @@ async def ai_reply(message, text):
         reply = response.choices[0].message["content"]
         await message.answer(text)
     except Exception as e:
+        print (e)
         await message.answer("خطا")
 def main():
     application = ApplicationBuilder().token(TOKEN).build()
