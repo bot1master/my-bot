@@ -76,7 +76,7 @@ async def ai_reply(update, text):
         reply = response.choices[0].message["content"]
         await update.message.reply_text(reply)
     except Exception as e:
-        await update.message.reply_text("❌ خطأ في الذكاء الاصطناعي")
+        bot.send_message(f"Error: {e}")
 def main():
     application = ApplicationBuilder().token(TOKEN).build()
     application.add_handler(CommandHandler("start",start))
