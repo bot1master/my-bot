@@ -70,13 +70,13 @@ async def news(update, context):
         await update.message.reply_text(msg)
     except:
         await update.message.reply_text("خطأ في الاخبار")
-async def ai_reply(update, text):
+async def ai_reply(message, text):
     try:
         response = openai.ChatCompletion.create(model="gpt-4o-mini", messages=[{"role": "user", "content": text}])
         reply = response.choices[0].message["content"]
-        await update.message.reply_text(reply)
-    except Exception as e:
         await message.answer(text)
+    except Exception as e:
+        await message.answer("خطا")
 def main():
     application = ApplicationBuilder().token(TOKEN).build()
     application.add_handler(CommandHandler("start",start))
