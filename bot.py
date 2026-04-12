@@ -75,11 +75,11 @@ async def ai_reply(update, text):
         url = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
         headers = {"Authorization": f"Bearer{HF_API_KEY}"}
         response = requests.post(url, headers=headers, json={"inputs": text})
-        date = response.json()
+        data = response.json()
         await update.message.reply_text("تم استلام رد من السيرفر")
-        print (date)
+        print (data)
         if isinstance(data, list) and len(data) > 0:
-            reply = date[0].get("generated_text", "مافي رد")
+            reply = data[0].get("generated_text", "مافي رد")
         elif isinstance(data, dict) and "error" in data:
             reply = "❌ خطأ من السيرفر: " + data["error"]
         else:
