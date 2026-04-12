@@ -73,8 +73,9 @@ async def news(update, context):
 async def ai_reply(update, text):
     try:
         url = "https://router.huggingface.co/hf-inference/models/facebook/blenderbot-400M-distill"
-        headers = {"Authorization": f"Bearer{HF_API_KEY}"}
-        response = requests.post(url, headers=headers, json={"inputs": text})
+        headers = {"Authorization": f"Bearer{HF_API_KEY}", "Content-Type": "application/json"}
+        payload = {"inputs": text}
+        response = requests.post(url, headers=headers, json=payload)
         data = response.json()
         await update.message.reply_text("تم استلام رد من السيرفر")
         print (data)
