@@ -77,7 +77,6 @@ async def ai_reply(update, text):
         payload = {"inputs": text}
         response = requests.post(url, headers=headers, json=payload)
         data = response.json()
-        await update.message.reply_text("تم استلام رد من السيرفر")
         print (data)
         if isinstance(data, list) and len(data) > 0:
             reply = data[0].get("generated_text", "مافي رد")
