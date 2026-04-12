@@ -76,6 +76,7 @@ async def ai_reply(update, text):
         headers = {"Authorization": f"Bearer{HF_API_KEY}"}
         response = requests.post(url, headers=headers, json={"inputs": text})
         date = response.json()
+        await update.message.reply_text("تم استلام رد من السيرفر")
         print (date)
         if isinstance(data, list) and len(data) > 0:
             reply = date[0].get("generated_text", "مافي رد")
