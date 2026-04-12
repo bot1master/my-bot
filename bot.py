@@ -72,7 +72,7 @@ async def news(update, context):
         await update.message.reply_text("خطأ في الاخبار")
 async def ai_reply(update, text):
     try:
-        url = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
+        url = "https://router.huggingface.co/hf-inference/models/facebook/blenderbot-400M-distill"
         headers = {"Authorization": f"Bearer{HF_API_KEY}"}
         response = requests.post(url, headers=headers, json={"inputs": text})
         data = response.json()
