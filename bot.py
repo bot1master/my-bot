@@ -73,6 +73,7 @@ async def news(update, context):
 async def ai_reply(update, text):
     try:
         url = "https://router.huggingface.co/hf-inference/models/facebook/blenderbot-400M-distill"
+        url = "https://api.affiliateplus.xyz/api/chatbot"
         headers = {"Authorization": f"Bearer{HF_API_KEY}", "Content-Type": "application/json"}
         payload = {"inputs": text}
         response = requests.post(url, headers=headers, json=payload)
@@ -93,6 +94,6 @@ def main():
     application.add_handler(CommandHandler("news", news))
     application.add_handler(MessageHandler(filters.TEXT,
     handle_message))
-    application.run_polling(timeout=30)
+    application.run_polling()
 if __name__ == "__main__":
     main()
