@@ -64,7 +64,7 @@ def main():
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
-    print("Bot running...")
+    print ("Bot running...")
     app.run_polling()
 
 if __name__ == "__main__":
