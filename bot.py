@@ -4,8 +4,8 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, Con
 from groq import Groq
 
 # 🔑 مفاتيحك
-TELEGRAM_BOT_TOKEN = "PUT_YOUR_TELEGRAM_TOKEN"
-GROQ_API_KEY = "PUT_YOUR_GROQ_KEY"
+TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+GROQ_API_KEY = "YOUR_GROQ_API_KEY"
 
 client = Groq(api_key=GROQ_API_KEY)
 
@@ -96,5 +96,6 @@ app.add_handler(CommandHandler("reset", reset))
 app.add_handler(CommandHandler("info", info))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-print("🤖 Bot is running...")
-app.run_polling()
+print ("🤖 Bot is running...")
+if __name__ == "__main__":
+    app.run_polling()
