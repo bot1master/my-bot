@@ -1,10 +1,11 @@
+import os
 import time
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, ContextTypes, filters
 from groq import Groq
 
 # 🔑 مفاتيحك
-TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+TOKEN = os.getenv("BOT_TOKEN")
 GROQ_API_KEY = "YOUR_GROQ_API_KEY"
 
 client = Groq(api_key=GROQ_API_KEY)
@@ -89,7 +90,7 @@ async def info(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 # ===================== 🚀 تشغيل البوت =====================
-app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
+app = ApplicationBuilder().token(TOKEN).build()
 
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("reset", reset))
