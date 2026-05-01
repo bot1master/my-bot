@@ -7,6 +7,7 @@ from groq import Groq
 # 🔑 مفاتيحك
 TOKEN = os.getenv("BOT_TOKEN")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+MODEL = "llama-3.3-70b-versatile"
 if not GROQ_API_KEY:
      raise ValueError("❌ GROQ_API_KEY غير موجود")
 client = Groq(api_key=GROQ_API_KEY)
@@ -32,7 +33,7 @@ def ask_ai(user_id, message):
 
     # إرسال إلى Groq
     response = client.chat.completions.create(
-        model="llama3-70b-8192",
+        model=MODEL,
         messages=[
             {"role": "system", "content": "أنت مساعد ذكي احترافي، مختصر ودقيق."},
             *memory[user_id]
