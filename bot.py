@@ -7,7 +7,8 @@ from groq import Groq
 # 🔑 مفاتيحك
 TOKEN = os.getenv("BOT_TOKEN")
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-
+if not GROQ_API_KEY:
+     raise ValueError("❌ GROQ_API_KEY غير موجود")
 client = Groq(api_key=GROQ_API_KEY)
 
 # 🧠 ذاكرة المستخدمين (Multi-user memory)
